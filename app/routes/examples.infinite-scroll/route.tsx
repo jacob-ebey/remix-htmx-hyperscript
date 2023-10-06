@@ -1,16 +1,16 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { getItems } from "./examples/items";
+import * as itemsService from "./service";
 
-import { Item } from "./examples.infinite-scroll.api";
+import { Item } from "../examples.infinite-scroll/components";
 
 export function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const pageStr = url.searchParams.get("page") ?? "1";
   let page = Number.parseInt(pageStr, 10);
   page = Number.isSafeInteger(page) && page > 0 ? page : 1;
-  const items = getItems(page);
+  const items = itemsService.getItems(page);
 
   return { items, page, nextPage: page + 1 };
 }
@@ -19,7 +19,7 @@ export default function InfiniteScroll() {
   const { items, page, nextPage } = useLoaderData<typeof loader>();
 
   return (
-    <main>
+    <main id="main">
       <h1>Infinite Scroll</h1>
       <p>A simple infinite scroll example.</p>
 

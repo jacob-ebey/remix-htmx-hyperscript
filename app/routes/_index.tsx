@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <main>
+    <main id="main">
       <h1>Revitalize Web Development with HTML & HTTP</h1>
       <p>
         Pair HTMX for seamless client-side navigation and view transitions with

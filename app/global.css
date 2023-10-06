@@ -11,6 +11,24 @@
   display: none;
 }
 
+.skip {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip:focus {
+  left: calc((100% - var(--eff-line-length)) / 2);
+  width: auto;
+  height: auto;
+}
+
+#main {
+  outline: none;
+}
+
 dialog {
   position: fixed;
   top: 0;
@@ -45,4 +63,8 @@ dialog {
 dialog[open] {
   display: flex;
   flex-direction: column;
+}
+
+li[tabindex="0"]:focus {
+  outline: 1px dotted;
 }

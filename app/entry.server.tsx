@@ -1,7 +1,7 @@
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 
-import { renderToString } from "react-dom/server";
+import { html } from "./utils";
 
 export default function handleRequest(
   request: Request,
@@ -10,13 +10,15 @@ export default function handleRequest(
   remixContext: EntryContext,
   loadContext: AppLoadContext
 ) {
-  const headers = new Headers(responseHeaders);
-  headers.set("Content-Type", "text/html");
-  return new Response(
-    renderToString(<RemixServer context={remixContext} url={request.url} />),
-    {
-      headers,
+  if (request.headers.get("HX-Swap") === "none") {
+    return new Response(null, {
+      headers: responseHeaders,
       status: responseStatusCode,
-    }
-  );
+    });
+  }
+
+  return html(<RemixServer context={remixContext} url={request.url} />, {
+    headers: responseHeaders,
+    status: responseStatusCode,
+  });
 }
