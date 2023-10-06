@@ -18,7 +18,6 @@ export function Board({ children }: { children: React.ReactNode }) {
           __html: `
             behavior BoardColumn
               on add
-                log event
                 if .board-todo contains event.item
                   set the name of the first <input/> in event.item to 'todo'
                 else

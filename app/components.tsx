@@ -92,7 +92,6 @@ export function SearchDialog() {
             with wrapping
           halt the event
         on keydown[key=='Tab' and shiftKey] from me
-          log 'here'
           focus() the previous <input, button, a/>
             from target
             within me
