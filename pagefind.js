@@ -48,7 +48,9 @@ async function indexFile(site, file) {
   }
   await index.addHTMLFile({
     content: await fs.readFile(`search/${site}/${file}`, "utf8"),
-    url: `/redirect?location=https://${site}/${pathname}`,
+    url: `/redirect?${new URLSearchParams([
+      ["location", `https://${site}/${pathname}`],
+    ])}`,
   });
   console.log(`Indexed https://${site}/${pathname}`);
 }

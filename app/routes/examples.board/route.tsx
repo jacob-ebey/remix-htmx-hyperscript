@@ -1,8 +1,15 @@
-import { type ActionFunctionArgs } from "@remix-run/node";
+import { type ActionFunctionArgs, type MetaFunction } from "@remix-run/node";
 import { useLoaderData, useLocation } from "@remix-run/react";
 
 import { Board, BoardColumn, BoardItem } from "./components";
 import * as todosService from "./service";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Remix + HTMX + Hyperscript" },
+    { name: "description", content: "Welcome to Remix!" },
+  ];
+};
 
 export async function loader() {
   const todos = await todosService.getTodos();

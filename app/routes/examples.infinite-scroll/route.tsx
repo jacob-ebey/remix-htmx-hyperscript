@@ -1,9 +1,15 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import { type LoaderFunctionArgs, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import { Item } from "./components";
 import * as itemsService from "./service";
 
-import { Item } from "../examples.infinite-scroll/components";
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Remix + HTMX + Hyperscript" },
+    { name: "description", content: "Welcome to Remix!" },
+  ];
+};
 
 export function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
