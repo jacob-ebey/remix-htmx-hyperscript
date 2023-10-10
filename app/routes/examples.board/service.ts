@@ -9,8 +9,13 @@ export function getTodos() {
   return Array.from(todos.values());
 }
 
-export function setDone(ids: number[], done: boolean) {
-  for (const id of ids) {
-    todos.get(id)!.done = done;
+export function updateTodos(
+  upates: Record<number, { label?: string; done?: boolean }>
+) {
+  for (const [id, todo] of Object.entries(upates)) {
+    const currentTodo = todos.get(Number(id));
+    if (currentTodo) {
+      todos.set(Number(id), { ...currentTodo, ...todo });
+    }
   }
 }

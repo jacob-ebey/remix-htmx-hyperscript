@@ -73,19 +73,23 @@ export default function BoardExample() {
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const intent = formData.get("intent");
 
-  if (intent === "todo") {
-    await todosService.setDone(
-      formData.getAll("todo").map((id) => Number.parseInt(String(id), 10)),
-      false
-    );
-  } else if (intent === "done") {
-    await todosService.setDone(
-      formData.getAll("done").map((id) => Number.parseInt(String(id), 10)),
-      true
-    );
+  const updates: Record<number, { label?: string; done?: boolean }> = {};
+
+  for (const [key, value] of formData) {
+    if (key.startsWith("label_")) {
+      const id = Number.parseInt(key.slice(6), 10);
+      updates[id] = { ...updates[id], label: String(value) };
+    } else if (key === "done") {
+      const id = Number.parseInt(String(value), 10);
+      updates[id] = { ...updates[id], done: true };
+    } else if (key === "todo") {
+      const id = Number.parseInt(String(value), 10);
+      updates[id] = { ...updates[id], done: false };
+    }
   }
+
+  await todosService.updateTodos(updates);
 
   return null;
 }

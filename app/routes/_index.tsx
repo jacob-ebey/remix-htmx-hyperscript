@@ -72,11 +72,11 @@ export default function Index() {
         <button
           type="button"
           _="
-      on click
-        set counter to the next <span/>
-        decrement counter.innerText by 1
-      end
-    "
+            on click
+              set counter to the next <span/>
+              decrement counter.innerText by 1
+            end
+          "
         >
           -
         </button>{" "}
@@ -84,11 +84,11 @@ export default function Index() {
         <button
           type="button"
           _="
-      on click
-        set counter to the previous <span/>
-        increment counter.innerText by 1
-      end
-    "
+            on click
+              set counter to the previous <span/>
+              increment counter.innerText by 1
+            end
+          "
         >
           +
         </button>
@@ -100,7 +100,8 @@ export default function Index() {
     type="button"
     _="
       on click
-        decrement the innerText of the next <span/> by 1
+        set counter to the next <span/>
+        decrement counter.innerText by 1
       end
     "
   >
@@ -111,7 +112,8 @@ export default function Index() {
     type="button"
     _="
       on click
-        increment the innerText of the next <span/> by 1
+        set counter to the previous <span/>
+        increment counter.innerText by 1
       end
     "
   >
